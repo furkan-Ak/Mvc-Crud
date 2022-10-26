@@ -1,0 +1,38 @@
+﻿@using MVCSTOK.Models.Entity;
+@model List<TBLMUSTERILER>
+@{
+    ViewBag.Title = "MusteriList";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("MusteriList", "Musteri", FormMethod.Get))
+            {
+    <p>
+        Aranacak Müşteri Adı: @Html.TextBox("p") @*parametre olarak aldık (text box içindeki değerler için söyledik, Bu değerleri alıp controllerdaki değere yollayacak ve ordaki işlemler gerçekleştirilecek, get() kullandık veri çekip filtreleme yapıyorum)*@
+        <input type="submit" value="Ara"/>
+    </p>
+            }
+<table class="table table-bordered">
+    <tr>
+        <th>Müşteri ID</th>
+        <th>Müşteri Ad</th>
+        <th>Müşteri Soyad</th>
+        <th>SİL</th>
+        <th>GÜNCELLE</th>
+        <th>ALERTLİ SİL</th>
+
+    </tr>
+    @foreach (var mstr in Model)
+    {
+        <tr>
+            <th>@mstr.MUSTERIID</th>
+            <td>@mstr.MUSTERIAD</td>
+            <td>@mstr.MUSTERISOYAD</td>
+            <td><a href="/Musteri/Sil/@mstr.MUSTERIID" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Musteri/MusteriGetir/@mstr.MUSTERIID" class="btn btn-success">Guncelle</a></td>
+            <td>@Html.ActionLink("ALERTLİ SİL", "Sil", new { id = mstr.MUSTERIID }, new { @class = "btn btn-warning", onclick = "return confirm('Silmek İstediğinize Emin misiniz?')" })</td>
+        </tr>
+        }
+</table>
+<a href="/Musteri/YeniMusteri/" class="btn btn-primary">Yeni Musteri Ekle</a>

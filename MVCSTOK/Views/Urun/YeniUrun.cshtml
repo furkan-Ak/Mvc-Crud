@@ -1,0 +1,32 @@
+﻿@model MVCSTOK.Models.Entity.TBLURUNLER
+@{
+    ViewBag.Title = "YeniUrun";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<form method="post" class=" form-group">
+    <div>
+        <label>Ürün Adı</label>
+        <input name="URUNAD" type="text" class="form-control" required=""/>
+    </div>
+    <div>
+        <label>Ürün Markası</label>
+        <input name="MARKA" type="text" class="form-control" required=""/>
+    </div>
+    <div>
+        <label>Ürün Kategorisi Seçiniz</label>
+     @Html.DropDownListFor(m => m.URUNKATEGORI, (List<SelectListItem>)ViewBag.dgr, new {@class="form-control"})
+    </div>
+    <div>
+        <label>Ürün Fiyatı</label>
+        <input name="FIYAT" type="text" class="form-control" />
+    </div>
+    <div>
+        <label>Ürün Stok Adedi </label>
+        <input name="STOK" type="text" class="form-control" />
+    </div>
+    <div>
+        <button style="margin-top:15px;" class="btn btn-info">Yeni Ürün Ekle</button>
+    </div>
+</form>
+
